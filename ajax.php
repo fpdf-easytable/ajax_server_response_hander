@@ -31,9 +31,6 @@ if(isset($_POST['target'])){
 		AjaxResponse::functionCall('popUpAPI.display', array());
 	}
 }
-elseif(isset($_POST['get_data'])){
-}
-
 
 
 //###################################################################

@@ -12,8 +12,13 @@
 <script>
 
 AjaxServerResponseHander.setDebug(true);
+
 AjaxServerResponseHander.addHandler('statusCode:500', function(){
-	alert('Please try again latter');
+	alert('Please try again latter.');
+});
+
+AjaxServerResponseHander.addHandler('statusCode:400', function(){
+	alert('Page not found.');
 });
 
 </script>
