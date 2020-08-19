@@ -1,0 +1,133 @@
+<?php
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Example</title>
+<script type="text/javascript" src="AjaxServerResponseHander.min.js"></script>
+<script type="text/javascript" src="library.js"></script>
+<link rel="stylesheet" href="popup.css" type="text/css"/> 
+
+<script>
+
+AjaxServerResponseHander.setDebug(true);
+AjaxServerResponseHander.addHandler('statusCode:500', function(){
+	alert('Please try again latter');
+});
+
+</script>
+
+</head>	
+<body id="body">
+   
+<!-- ############################################################# -->
+<!-- simple PopUp -->
+<div id="dim"></div>
+<div id="pop_wrapper">
+	<div id="pop_up">
+		<div id="pop_up_header">
+			<span id="popup_title"></span>
+ 			<span id="closePopUp">&times;</span>
+ 			<div style="clear:both;"></div>
+ 		</div>
+ 		<div id="popup_content">
+ 		</div>
+ 	</div>
+</div>
+
+<!-- ############################################################# -->
+
+<div style="display: table;border:1px solid;min-width:400px;">
+	<div id='login_block'>
+		<form action="" method="POST" name="login" id="loginForm">
+			<input type="hidden" name="target" value="authentication"/>
+			<table>
+				<tr><th>Username</th><td><input type="text" class="login_input" placeholder="whatever" name="user_name"></td></tr>
+				<tr><th>Password</th><td><input type="password" class="login_input" placeholder="whatever" name="pswd"/></td></tr>
+				<tr><td colspan="2" class="row_button"><input type="submit" class="buttonform" value="Submit" onclick="submitForm('login');"/></td></tr>
+			</table>
+		</form>
+	</div>	
+	<p id="authentication_fail" style="color:red; display:none;"></p>
+
+	<p id="authentication_response" style="display:none;"></p>
+</div> 
+<br/>
+<br/>
+
+<button id="settings">
+Settings
+</button>
+
+</body>
+
+<script>
+
+document.getElementById('loginForm').addEventListener("click", function(event){
+	event.preventDefault();
+});
+
+</script>
+
+
+
+<script>
+
+var popUpAPI={};
+
+window.addEventListener("DOMContentLoaded", function(){
+	(function(){
+		var dim=document.getElementById('dim');
+		var popUp=document.getElementById('pop_wrapper');	
+		var body=document.getElementById('pop_up');
+		var container=document.getElementById('popup_content');
+
+		popUp.style.top=0.1*window.innerHeight+'px';
+		body.style.maxHeight=0.8*window.innerHeight+'px';
+
+		popUpAPI.display=function(){
+			dim.style.display='block';
+			popUp.style.visibility='visible';
+		};
+		popUpAPI.closing=function(e){
+			if(typeof e!=='undefined'){
+				e.stopPropagation();
+				return;
+			}
+			popUp.style.visibility='hidden';
+			dim.style.display='none';
+			container.innerHTML='';
+		};
+
+		document.getElementById('closePopUp').addEventListener('click', function(){
+			popUpAPI.closing();
+		});
+
+		dim.addEventListener('click', function(){
+			popUpAPI.closing();
+		});
+
+		popUp.addEventListener('click', function(){
+			popUpAPI.closing();
+		});
+
+		container.addEventListener('click', function(event){
+			popUpAPI.closing(event);
+		}); 
+		
+
+		document.getElementById('settings').addEventListener('click', function () {
+			sendPostData();
+		});
+
+	})();
+})
+
+
+
+</script>
+
+
+
+</html>
