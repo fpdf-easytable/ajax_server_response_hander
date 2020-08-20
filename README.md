@@ -31,7 +31,7 @@ the server who knows the result of a request before the client does.
 
 This solution is achieved as follows:
    - frontend: reusable functions and modules to manipulate the elements of the website,
-   - backend: integrate in the response the javascript functions to be used to interpret the response
+   - backend: integrate in the response the names of javascript functions to be called by the browser to resolve the response.
 
 # Documentation AjaxResponse
 
