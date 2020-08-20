@@ -148,4 +148,25 @@ callback
 
 # Example
 
-The directory examle contains a working proof of concept of this approach.
+The directory examle contains a working proof of concept of this approach. It contains
+   - frontend
+      - example.html 
+      - library.js (where generic functions to manipulate the document are defined. Of course, you can include
+                any js file where your functions and modules are defined.)
+      - AjaxServerResonseHander.min.js
+      - popup.css
+   - backend      
+      - ajax_response_class.php
+      - ajax.php (the target of the ajax calls. See ajax.php for more details)
+
+
+
+
+
+
+
+
+
+
+
+
