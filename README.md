@@ -145,3 +145,7 @@ statusResponse
 callback
 
    a function to be called when the server responds with a particular status code other than 200.
+
+# Example
+
+The directory examle contains a working proof of concept of this approach.
