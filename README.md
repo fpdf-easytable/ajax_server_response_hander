@@ -1,12 +1,12 @@
 # Ajax Server Response Hander
 
-It is a two components (one frontend and one backend) to make ajax request and handle
-server response.
+It has two components (one frontend and one backend) to make ajax requests and handle
+server responses.
 
 # Background
 
 Many developers rely on jquery to make ajax calls to the server. And soon they
-find themselve writing code like
+find themselves writing code like
 ```
 $("button").click(function(){
   $.ajax({url: "demo_test.php", success: function(result){
@@ -26,12 +26,12 @@ $("button").click(function(){
 one ends defining one for each possible callback function! And then nothing is reusable.
 
 Ajax Server Response Hander proposes a different approach: let the server tell the client
-what to do with the response and let the client resolves the response. After all, it is
+what to do with the response and let the client resolve the response. After all, it is
 the server who knows the result of a request before the client does.
 
 This solution is achieved as follows:
    - frontend: reusable functions and modules to manipulate the elements of the website,
-   - backend: integrate in the response the javascript functions to be used to interprete the response
+   - backend: integrate in the response the javascript functions to be used to interpret the response
 
 # Documentation AjaxResponse
 
@@ -39,7 +39,7 @@ This solution is achieved as follows:
 
 *Description:*
 
-   Add function and its parameters to the response.
+   add function and its parameters to the response.
 
 *Parameters:*
 
@@ -55,17 +55,17 @@ params
 
 *Description:*
 
-   Add and client element id and its content to the response.
+   add an client document element id and its content to the response.
    
 *Parameters:*
 
 id
 
-   id of an document element in the website
+   id of an document element of the website
 
 data
 
-   the content that need to be set inside of the element with id id. 
+   the content that needs to be set inside of the element with id id. 
 
 
 **AjaxResponse::pushBuffer()**
@@ -78,18 +78,70 @@ data
 
 *Description*
 
-   initialize the response and set and function to be called if the script fails.
+   send the output buffer to the browser at the end of the request.
    
 # Documentation AjaxServerResponseHander
 
-**AjaxServerResponseHander.postForm(dataString, url)**
+**AjaxServerResponseHander.submitForm(string formName, string url)**
 
 *Description*
 
+   submit a html form (via ajax call) via a POST request asynchronously.
 
-**AjaxServerResponseHander.postData(dataString, url)**
-		
-**AjaxServerResponseHander.setDebug(_quiet)**
+*Parameters:*
 
-**AjaxServerResponseHander.addHandler(statusResponse, callback)**
+formName
 
+   the value of the name attribute for the form to be submitted.
+   
+url
+
+   the url to send the post request.
+
+**AjaxServerResponseHander.postData(string dataString, string url)**
+
+*Description*
+
+   post arbitrary string of attributes and values via a POST request asynchronously.
+
+*Parameters:*
+
+dataString
+
+   string of the form: "attr_1=val_1&attr_2=val_2...", some values need to be url encoded with encodeURIComponent.
+   
+url
+
+   url to send the post request.
+	
+**AjaxServerResponseHander.setDebugger(function callback)**
+
+*Description*
+
+   set a callback function to inspect error of failures of the request/response.
+
+*Parameters:*
+
+callback
+
+   a function that accepts a parameter which value can be:
+     - the flushed buffer from the server (not the actual response) will be printed using console.log.
+     - error failure of the ajax request
+     - string
+
+**AjaxServerResponseHander.addServerFailHandler(string statusResponse, callback)**
+
+*Description*
+
+   set callback functions to be executed when the server responds with a status code other than
+   200.
+
+*Parameters:*
+
+statusResponse
+
+   a string of the form 'statusCode:codeNumber', for example: 'statusCode:400', 'statusCode:500'.
+
+callback
+
+   a function to be called when the server responds with a particular status code other than 200.

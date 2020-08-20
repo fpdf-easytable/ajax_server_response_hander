@@ -5,14 +5,15 @@ A set of simple functions to demonstrate AjaxServerResponseHander
 ------------------------------------------------------------------- */
 
 function submitForm(formName) {
-	var dataString=new FormData(document.forms.namedItem(formName));
-	AjaxServerResponseHander.postForm(dataString, 'ajax.php');
+	AjaxServerResponseHander.submitForm(formName, 'ajax.php');
 }
 
 
-function sendPostData(){
-	var dataString='target=popUp';
-	AjaxServerResponseHander.postData(dataString, 'ajax.php');
+function sendPostData(dataString, url){
+	if(typeof url==='undefined'){
+		url='ajax.php';
+	}
+	AjaxServerResponseHander.postData(dataString, url);
 }
 
 
