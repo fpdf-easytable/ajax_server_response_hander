@@ -148,7 +148,7 @@ callback
 
 # Example
 
-The directory examle contains a working proof of concept of this approach. It contains
+The directory example contains a working proof of concept of this approach. It contains
    - frontend
       - example.html 
       - library.js (where generic functions to manipulate the document are defined. Of course, you can include
