@@ -15,10 +15,15 @@ class AjaxResponse
 			'Functions'=>array()
 			);
 
-/**/public static function init(){
-/*     */ob_start(function($buffer){
-/*        */AjaxResponse::functionCall('AjaxServerResponseHander.debug', array($buffer));
-/*     */});
+/**/public static function init($debug=false){
+/*	  */if($debug){
+/*      */ob_start(function($buffer){
+/*         */AjaxResponse::functionCall('AjaxServerResponseHander.debug', array($buffer));
+/*      */});
+/*   */}
+/*   */else{
+/*      */ob_start();
+/*   */}
 /**/}
 
 /**/public static function pushBuffer(){
@@ -58,6 +63,5 @@ class AjaxResponse
 
 //####################################################################
 
-AjaxResponse::init();
 
 ?>

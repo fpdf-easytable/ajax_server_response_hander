@@ -33,7 +33,114 @@ This solution is achieved as follows:
    - frontend: reusable functions and modules to manipulate the elements of the website,
    - backend: integrate in the response the names of javascript functions to be called by the browser to resolve the response.
 
+# How to use it
+
+**Frontend**
+
+example.html
+    <html>
+    <head>
+       <script type="text/javascript" src="AjaxServerResponseHander.min.js"></script>
+
+       <!-- include your javascript functions, modules -->
+       <script type="text/javascript" src="javascript_libraries.js"></script>
+       <script type="text/javascript" src="more_javascript_libraries.js"></script>
+       
+       <!-- more stuff -->
+
+       <script>
+          // set debugger on if needed
+          AjaxServerResponseHander.setDebugger(function(data){
+	         console.log(data);
+          });
+
+          // add as many callback functions needed to handle different server status code
+          // other than 200
+
+          AjaxServerResponseHander.addServerFailHandler('statusCode:500', function(){
+	         alert('Please try again latter.');
+          });
+
+          AjaxServerResponseHander.addServerFailHandler('statusCode:404', function(){
+             alert('Page not found.');
+          });
+
+       </script>
+       </head>	
+       <body>
+
+         <!-- html stuff here -->
+
+        <script>
+          // maybe more javascript stuff here
+        </script>
+        </body>
+        </html>
+
+**Backend**
+
+The target for the ajax call should look like:
+
+    <?php
+    include 'ajax_response_class.php';
+    AjaxResponse::init(true);
+
+    var_dump($_POST);
+
+    echo "this too\n";
+
+     // some actions are executed here as a part of the login procedure
+    // when they are done we set the response
+
+    AjaxResponse::functionCall('cleanHTML', array('authentication_fail'));
+    AjaxResponse::innerHTML('authentication_response', 'Login successful!');
+
+    // remember anything that is not set via AjaxResponse will be push to the browser and capture
+    // by AjaxServerResponseHander::debug method if a callback is set
+    echo 'in authentication part';
+
+    // we do some calculations
+    $x=123 * 123;
+    AjaxResponse::innerHTML('popup_content', 'Greetings!');
+    AjaxResponse::innerHTML('no_ID', 'No element with this id!!');
+    AjaxResponse::functionCall('popUpAPI.display', array());
+
+    // but if you still want to inspect for debugging purposes 
+    $y=123*123+456+6756/123;
+    echo 'calculations OK!';
+
+    // We send the response... this just need to be called ONCE!
+    // and at the end.
+    AjaxResponse::pushBuffer();
+
+    ?>
+
+
+
 # Documentation AjaxResponse
+
+   With this class the server send the response as a JSON string (therefore the header 'Content-Type: application/json' is sent):
+```
+{
+   'textResponse':{id_1:val_1, id_2:val_2,....}, 
+	'Functions':{'functionName1':{{parameters1}}, 'functionName2':{{parameters2}},...}
+}
+```
+Every attribute in Functions is the name of a javascript defined function in the client side. 
+
+**AjaxResponse::init(boolean $debug)**
+
+*Description:*
+
+   turns output buffering on so any the output is stored in an internal buffer.
+   
+*Parameters:*
+
+debug
+   
+   if it is true, the contents of the internal buffer is set as value for the
+   attribute AjaxServerResponseHander.debug of the response so AjaxServerResponseHander can
+   use it for debugging if it has set a callback function (see [AjaxServerResponseHander](#documentation-ajaxServerResponseHander)).
 
 **AjaxResponse::functionCall(string $func, array $params)**
 
@@ -79,7 +186,11 @@ data
 *Description*
 
    send the output buffer to the browser at the end of the request.
-   
+
+
+
+
+
 # Documentation AjaxServerResponseHander
 
 **AjaxServerResponseHander.submitForm(string formName, string url)**

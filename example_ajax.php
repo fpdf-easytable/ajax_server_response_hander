@@ -5,7 +5,7 @@ A set of simple functions to demonstrate AjaxServerResponseHander
 ------------------------------------------------------------------- */
 
 include 'ajax_response_class.php';
-
+AjaxResponse::init(true);
 /*
 The following will be pushed to the browser and captured by 
 AjaxServerResponseHander::debug method if a callback is set

@@ -5,13 +5,13 @@ A set of simple functions to demonstrate AjaxServerResponseHander
 ------------------------------------------------------------------- */
 
 function submitForm(formName) {
-	AjaxServerResponseHander.submitForm(formName, 'ajax.php');
+	AjaxServerResponseHander.submitForm(formName, 'example_ajax.php');
 }
 
 
 function sendPostData(dataString, url){
 	if(typeof url==='undefined'){
-		url='ajax.php';
+		url='example_ajax.php';
 	}
 	AjaxServerResponseHander.postData(dataString, url);
 }
