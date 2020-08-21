@@ -41,6 +41,7 @@ example.html
 
     <html>
     <head>
+       <!-- here is where the magic happens -->
        <script type="text/javascript" src="AjaxServerResponseHander.min.js"></script>
 
        <!-- include your javascript functions, modules -->
@@ -93,8 +94,8 @@ The target for the ajax call should look like:
      // some actions are executed here as a part of the login procedure
     // when they are done we set the response
 
-    AjaxResponse::functionCall('cleanHTML', array('authentication_fail'));
-    AjaxResponse::innerHTML('authentication_response', 'Login successful!');
+    AjaxResponse::functionCall('fomeFunction', array('param1', param2));
+    AjaxResponse::innerHTML('some_ID', 'Hello!');
 
     // remember anything that is not set via AjaxResponse will be push to the browser and capture
     // by AjaxServerResponseHander::debug method if a callback is set
@@ -102,9 +103,8 @@ The target for the ajax call should look like:
 
     // we do some calculations
     $x=123 * 123;
-    AjaxResponse::innerHTML('popup_content', 'Greetings!');
-    AjaxResponse::innerHTML('no_ID', 'No element with this id!!');
-    AjaxResponse::functionCall('popUpAPI.display', array());
+    AjaxResponse::innerHTML('result_content', $x);
+    AjaxResponse::functionCall('anotherFunction', array());// no parameters
 
     // but if you still want to inspect for debugging purposes 
     $y=123*123+456+6756/123;
@@ -153,7 +153,8 @@ debug
 
 func
 
-   the name of a javascript function that needs to be called by the client.
+   the name of a javascript function that needs to be called by the client. The same function
+   can be added multiple times as it is needed.
 
 params
 
