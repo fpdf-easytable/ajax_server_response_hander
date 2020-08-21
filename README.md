@@ -87,7 +87,7 @@ The target for the ajax call should look like:
     include 'ajax_response_class.php';
     AjaxResponse::init(true);
 
-    var_dump($_POST);
+    var_dump($_POST); //this will be capture by the output buffer
 
     echo "this too\n";
 
@@ -99,6 +99,7 @@ The target for the ajax call should look like:
 
     // remember anything that is not set via AjaxResponse will be push to the browser and capture
     // by AjaxServerResponseHander::debug method if a callback is set
+
     echo 'in authentication part';
 
     // we do some calculations
@@ -244,7 +245,8 @@ callback
 
 statusResponse
 
-   a string of the form 'statusCode:codeNumber', for example: 'statusCode:400', 'statusCode:500'.
+   a string of the form 'statusCode:codeNumber', for example: 'statusCode:400', 'statusCode:500'; 
+   any other string will be ignored.
 
 callback
 
