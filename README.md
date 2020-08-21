@@ -38,6 +38,7 @@ This solution is achieved as follows:
 **Frontend**
 
 example.html
+
     <html>
     <head>
        <script type="text/javascript" src="AjaxServerResponseHander.min.js"></script>
