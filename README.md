@@ -250,21 +250,12 @@ callback
 
    a function to be called when the server responds with a particular status code other than 200.
 
-# Example
+# Donations?
 
-The directory example contains a working proof of concept of this approach. It contains
-   - frontend
-      - example.html 
-      - library.js (where generic functions to manipulate the document are defined. Of course, you can include
-                any js file where your functions and modules are defined.)
-      - AjaxServerResonseHander.min.js
-      - popup.css
-   - backend      
-      - ajax_response_class.php
-      - ajax.php (the target of the ajax calls. See ajax.php for more details)
+If you are using this for the company you work for, they are getting the money, you are 
+getting the medals and I am getting nothing! Is that fair?
 
-
-
+It does cost NOTHING to push the star button at the top.
 
 
 
