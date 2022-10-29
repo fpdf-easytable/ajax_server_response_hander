@@ -19,6 +19,9 @@ class AjaxResponse
 /*	  */if($debug){
 /*      */ob_start(function($buffer){
 /*         */AjaxResponse::functionCall('AjaxServerResponseHander.debug', array($buffer));
+/*         *///AjaxResponse::flushBuffer();
+/*         */header('Content-Type: application/json');		
+/*         */echo json_encode(self::$response);
 /*      */});
 /*   */}
 /*   */else{
@@ -34,8 +37,13 @@ class AjaxResponse
 /*   */echo json_encode(self::$response);
 /*   */ob_end_flush();
 /**/}
-   
-	public static function innerHTML($id, $data){
+
+/**/public static function flushBuffer(){
+/*   */header('Content-Type: application/json');		
+/*   */echo json_encode(self::$response);
+/**/}
+
+	public static function innerHTML($id, $data=''){
 		if(is_array($id)){
 			foreach($id as $k=>$v){
 				self::$response['textResponse'][$k]=$v;
